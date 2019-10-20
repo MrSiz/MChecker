@@ -3,6 +3,7 @@
 
 #include <string>
 #include <map>
+#include <stdlib.h>
 
 struct Info
 {
@@ -10,6 +11,8 @@ struct Info
     size_t line;
     size_t sz;
     const char *filename;
+    Info(size_t l = -1, size_t s = 0, const char *f = "Null")
+    : line(l), sz(s), filename(f) {}
 };
 
 #define malloc(size) chk_malloc(size, __FILE__, __LINE__)
@@ -18,7 +21,7 @@ struct Info
 #define realloc(ptr, size) chk_realloc(ptr, size, __FILE__, __LINE__)
 
 
-extern std::map<intptr_t, Info> mtable;
+extern std::map<void*, Info> mtable;
 extern size_t total_bytes_alloc;
 extern size_t total_bytes_del;
 
